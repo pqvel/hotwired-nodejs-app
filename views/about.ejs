@@ -1,0 +1,22 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <script src="bundle.js" async></script>
+</head>
+<body class="df df-column">
+  <%- include('./partials/style'); -%>
+  <%- include('./partials/header'); -%>
+  <div class="content df">
+    <%- include('./partials/aside'); -%>
+    <turbo-frame 
+      id="main"
+      data-turbo-action="advance"
+    >
+      <%- include('./turbo/about'); -%>
+    </turbo-frame>
+  </div>
+  <turbo-frame id="modal"></turbo-frame>
+  <%- include('./partials/footer'); -%>
+</body>
+</html>

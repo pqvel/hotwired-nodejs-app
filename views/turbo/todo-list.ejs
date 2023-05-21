@@ -1,0 +1,25 @@
+<!-- 
+<turbo-frame id="main"
+data-turbo-action="advance"> -->
+<main class="df df-column b">
+  <form action="/create-todo" data-turbo-action="append" method="post" class="df df-column">
+    <label class="df df-column m-10">
+      <span>Заголовок:</span>
+      <input name="title" type="text">
+    </label>
+    <label class="df df-column m-10">
+      <span>Описание:</span>
+      <input name="descr" type="text">
+    </label>
+    <button type="submit" class="btn m-10">Создать</button>
+  </form>
+  <ol>
+    <% for (let i = 0; i < todos.length; i++) {%>
+        <li class="df df-column">
+          <h5><%= todos[i].title %></h5>
+          <p><%= todos[i].descr %></p>
+        </li>
+    <% } %>
+  </ol>
+</main>
+<!-- </turbo-frame> -->
