@@ -8,11 +8,7 @@
         <a data-turbo-frame="main" href="/about">О нас</a>
       </li>
       <li>
-        <% if (isAuth) { %>
-        <a data-turbo-frame="modal" href="/about">Список дел</a>
-        <% } else { %>
-        <a data-turbo-frame="modal" href="/login">Список дел</a>
-        <% } %>
+        <a data-turbo-frame="modal" href="/todo-list">Список дел</a>      
       </li>
     </ul>
   </nav>

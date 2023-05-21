@@ -4,13 +4,31 @@ const webpack = require("webpack");
 const webpackMiddleware = require("webpack-dev-middleware");
 const webpackConfig = require("./webpack.config");
 const bodyParser = require("body-parser");
+const cookieParser = require('cookie-parser');
+const session = require('express-session')
 const uuid = require("uuid");
 
 const app = express();
+
 app.set("view engine", "ejs");
+
 app.use(express.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(webpackMiddleware(webpack(webpackConfig)));
+app.use(cookieParser('secret key'));
+app.use(
+  session({
+      secret: 'you secret key',
+      saveUninitialized: true,
+  })
+);
+
+app.use((err, req, res, next) => {
+  console.log(req.session.isSecondLoad)
+  req.session.isSecondLoad = true
+  next()
+})
+
 const publicPath = path.join(__dirname, "views");
 const port = process.env.PORT || 9000;
 
@@ -30,6 +48,9 @@ app.get("/about", (req, res) => {
 });
 
 app.get("/todo-list", (req, res) => {
+  if (!isAuth) {
+    return res.redirect("/login")
+  }
   res.render("todo-list", {
     todos,
     isAuth,
